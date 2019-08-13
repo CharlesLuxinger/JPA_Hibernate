@@ -16,6 +16,10 @@ public class Conta {
 	private String numero;
 	private String banco;
 	
+	public Conta() {
+
+	}
+
 	public Conta(String titular, String agencia, String numero, String banco) {
 		this.titular = titular;
 		this.agencia = agencia;
