@@ -20,5 +20,16 @@ public class TesteConta {
 		
 		em.getTransaction().commit();
 		em.close();
+		
+		//Após fechar a transação está no estado Detached, a entidade não é mais gerenciada pelo JPA
+		//Necessitando voltar para o estado Managed, com o método merge
+		EntityManager em2 = new JPAUtil().getEntityManager();
+		em2.getTransaction().begin();
+		
+		conta.setTitular("Leonardo da Silva");
+		em2.merge(conta);
+		
+		em2.getTransaction().commit();
+		em2.close();
 	}
 }
