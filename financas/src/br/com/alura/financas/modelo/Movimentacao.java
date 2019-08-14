@@ -2,6 +2,7 @@ package br.com.alura.financas.modelo;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,10 +30,27 @@ public class Movimentacao {
 	private Calendar data;
 	
 	@Enumerated(EnumType.STRING)
-	private TipoMovimentacao tipo;
+	private TipoMovimentacao tipoMovimentacao;
 	
 	@ManyToOne
 	private Conta conta;
+	
+	@ManyToMany
+	private List<Categoria> categorias;
+
+	public Movimentacao() {
+		super();
+	}
+
+	public Movimentacao(BigDecimal valor, String descricao, Calendar data, TipoMovimentacao tipoMovimentacao,
+			Conta conta, List<Categoria> categorias) {
+		this.valor = valor;
+		this.descricao = descricao;
+		this.data = data;
+		this.tipoMovimentacao = tipoMovimentacao;
+		this.conta = conta;
+		this.categorias = categorias;
+	}
 
 	public Integer getId() {
 		return id;
@@ -66,11 +85,19 @@ public class Movimentacao {
 	}
 
 	public TipoMovimentacao getTipoMovimentacao() {
-		return tipo;
+		return tipoMovimentacao;
 	}
 
-	public void setTipoMovimentacao(TipoMovimentacao tipo) {
-		this.tipo = tipo;
+	public void setTipoMovimentacao(TipoMovimentacao tipoMovimentacao) {
+		this.tipoMovimentacao = tipoMovimentacao;
+	}
+
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
 	}
 
 	public Conta getConta() {
