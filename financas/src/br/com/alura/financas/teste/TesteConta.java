@@ -31,5 +31,15 @@ public class TesteConta {
 		
 		em2.getTransaction().commit();
 		em2.close();
+		
+		//Para se remover a entidade deve estar no estado Managed, através no metodo find é possível
+		EntityManager em3 = new JPAUtil().getEntityManager();
+		em3.getTransaction().begin();
+			
+		Conta conta2 = em3.find(Conta.class, 6);
+		em3.remove(conta2);		
+		
+		em3.getTransaction().commit();
+		em3.close();
 	}
 }
