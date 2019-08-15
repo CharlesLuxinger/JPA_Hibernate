@@ -12,12 +12,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.alura.financas.enums.TipoMovimentacao;
 
 @Entity
+@NamedQuery(name = "movimentacaoFindByConta", query = "SELECT mov FROM Movimentacao mov WHERE mov.conta = :pConta")
 public class Movimentacao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

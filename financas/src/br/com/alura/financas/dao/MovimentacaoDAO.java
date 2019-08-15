@@ -13,9 +13,7 @@ public class MovimentacaoDAO {
 	public MovimentacaoDAO(EntityManager em) {
 		this.em = em;
 	}
-	
-	
-	
+		
 	public List<Double> getMediasPorCategoria(Categoria cat1) {
 		TypedQuery<Double> query = em.createQuery(
 				" SELECT AVG(mov.valor) FROM Movimentacao mov " +
@@ -25,8 +23,5 @@ public class MovimentacaoDAO {
 
 		query.setParameter("pCategoria", cat1);
 		return query.getResultList();
-	}
-
-	
-	
+	}	
 }
