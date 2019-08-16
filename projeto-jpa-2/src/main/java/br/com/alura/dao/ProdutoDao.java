@@ -31,19 +31,28 @@ public class ProdutoDao {
 		Produto produto = em.find(Produto.class, id);
 		return produto;
 	}
-
+	
 	public List<Produto> getProdutos(String nome, Integer categoriaId, Integer lojaId) {
+		// O EntityManger que instacia a entidade do CriteriaBuilder
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		
+		// Passando a Entitida constroi a query
 		CriteriaQuery<Produto> query = criteriaBuilder.createQuery(Produto.class);
+		
+		//Constroi o (SELECT * FROM CLASS) e Retorna a referencia para inserir os atributos
 		Root<Produto> root = query.from(Produto.class);
 
+		//Mapeia os atributos da classe
 		Path<String> nomePath = root.<String> get("nome");
 		Path<Integer> lojaPath = root.<Loja> get("loja").<Integer> get("id");
+		
+		//Mapeia referencias das tabelas e atributos  
 		Path<Integer> categoriaPath = root.join("categorias").<Integer> get("id");
 
 		List<Predicate> predicates = new ArrayList<>();
 
 		if (!nome.isEmpty()) {
+			// Inseri os predicados da Query
 			Predicate nomeIgual = criteriaBuilder.like(nomePath, nome);
 			predicates.add(nomeIgual);
 		}
@@ -56,11 +65,11 @@ public class ProdutoDao {
 			predicates.add(lojaIgual);
 		}
 
+		// Adiciona os predicados a Query
 		query.where((Predicate[]) predicates.toArray(new Predicate[0]));
 
 		TypedQuery<Produto> typedQuery = em.createQuery(query);
 		return typedQuery.getResultList();
-
 	}
 
 	public void insere(Produto produto) {
