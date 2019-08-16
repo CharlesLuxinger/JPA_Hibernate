@@ -13,7 +13,7 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.alura.dao.CategoriaDao;
@@ -27,7 +27,8 @@ import br.com.alura.model.Produto;
 @EnableWebMvc
 @ComponentScan("br.com.alura")
 @EnableTransactionManagement
-public class Configurador extends WebMvcConfigurerAdapter {
+//extends WebMvcConfigurerAdapter deprecated
+public class Configurador implements WebMvcConfigurer {
 	
 	@Bean
 	@Scope("request")
