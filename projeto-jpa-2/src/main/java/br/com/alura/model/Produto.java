@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Version;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
@@ -27,6 +28,9 @@ public class Produto {
 	private String nome;
 	@NotEmpty
 	private String linkDaFoto;
+	
+	@Version
+	private int versao;
 	
 	@NotEmpty
 	@Column(columnDefinition="TEXT")
@@ -99,6 +103,14 @@ public class Produto {
 
 	public Loja getLoja() {
 		return loja;
+	}
+
+	public int getVersao() {
+		return versao;
+	}
+
+	public void setVersao(int versao) {
+		this.versao = versao;
 	}
 
 }
