@@ -39,6 +39,8 @@ public class JpaConfigurator {
 	    dataSource.setMaxPoolSize(10);
 	    dataSource.setNumHelperThreads(15);
 	    
+	    dataSource.setIdleConnectionTestPeriod(1); //a cada um segundo testamos as conexões ociosas
+	    
 	    return dataSource;
 	}
 
